@@ -4,9 +4,6 @@ declare (strict_types=1);
 
 namespace funnymudpee\thinkphp\log\driver;
 
-use think\contract\LogHandlerInterface;
-use think\Log;
-
 
 class Syslog
 {
@@ -46,11 +43,11 @@ class Syslog
         $s = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         foreach ($log as $type => $val) {
             switch ($type) {
-                case Log::ERROR:
+                case 'error':
                     // 1*8+3
                     $pri = 11;
                     break;
-                case Log::DEBUG:
+                case 'debug':
                     // 1*8+3
                     $pri = 15;
                     break;

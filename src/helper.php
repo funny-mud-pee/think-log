@@ -26,5 +26,10 @@ function think_trace($log, ?Throwable $e, string $level = 'error')
 
 function think_trace_error($log, ?Throwable $e = null)
 {
-    return think_trace($log, $e, \think\Log::ERROR);
+    return think_trace($log, $e, 'error');
+}
+
+function think_trace_debug($log, ?Throwable $e = null)
+{
+    return think_trace($log, $e, 'debug');
 }
