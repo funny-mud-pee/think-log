@@ -21,7 +21,7 @@ function think_trace($log, ?Throwable $e, string $level = 'error')
 
     $trace .= $debug;
 
-    return trace($trace, $level);
+    \think\facade\Log::record($trace, $level);
 }
 
 function think_trace_error($log, ?Throwable $e = null)
