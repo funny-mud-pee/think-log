@@ -42,7 +42,11 @@ class Syslog
         }
         $s = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         foreach ($log as $type => $val) {
-            switch ($type) {
+            switch (strtolower($type)) {
+                case 'info':
+                    // 1*8+6
+                    $pri = 14;
+                    break;
                 case 'error':
                     // 1*8+3
                     $pri = 11;
@@ -50,6 +54,10 @@ class Syslog
                 case 'debug':
                     // 1*8+3
                     $pri = 15;
+                    break;
+                case 'emergency':
+                    // 1*8+0
+                    $pri = 8;
                     break;
                 default:
                     $pri = 11;
