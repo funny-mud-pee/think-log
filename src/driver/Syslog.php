@@ -4,7 +4,6 @@ declare (strict_types=1);
 
 namespace funnymudpee\thinkphp\log\driver;
 
-use think\App;
 use think\contract\LogHandlerInterface;
 use think\Log;
 
@@ -28,7 +27,7 @@ class Syslog implements LogHandlerInterface
     ];
 
 
-    public function __construct(App $app, $config = [])
+    public function __construct($config = [])
     {
         if (is_array($config)) {
             $this->config = array_merge($this->config, $config);
