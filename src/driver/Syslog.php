@@ -8,7 +8,7 @@ use think\contract\LogHandlerInterface;
 use think\Log;
 
 
-class Syslog implements LogHandlerInterface
+class Syslog
 {
     /**
      * 配置参数
