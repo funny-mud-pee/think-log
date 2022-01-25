@@ -15,7 +15,8 @@
   ],
   "require": {
     "php": ">=7.4",
-    "topthink/framework": "^6.0"
+    "topthink/framework": "^6.0",
+    "funny-mud-pee/helper": "dev-main"
   },
   "autoload": {
     "psr-4": {

@@ -31,7 +31,7 @@ class Syslog implements LogHandlerInterface
     public function __construct(App $app, $config = [])
     {
         if (is_array($config)) {
-            $this->config = array_merge_recursive($this->config, $config);
+            $this->config = array_merge($this->config, $config);
         }
     }
 
@@ -44,7 +44,6 @@ class Syslog implements LogHandlerInterface
         if (!extension_loaded('sockets')) {
             return true;
         }
-        $time = datetime_format();
         $s = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         foreach ($log as $type => $val) {
             switch ($type) {
@@ -62,7 +61,7 @@ class Syslog implements LogHandlerInterface
             foreach ($val as $msg) {
                 $pri = '<' . $pri . '>';
 
-                $header = datetime_format('M j H:i:s');
+                $header = date('M j H:i:s');
                 if (!empty($this->config['msg']['hostname'])) {
                     $header .= ' ' . $this->config['msg']['hostname'];
                 }
