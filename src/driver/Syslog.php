@@ -33,13 +33,10 @@ class Syslog implements LogHandlerInterface
         if (is_array($config)) {
             $this->config = array_merge_recursive($this->config, $config);
         }
-        dd($this->config);
     }
 
     /**
-     * 日志写入接口
-     * @access public
-     * @param array $log 日志信息
+     * @param array $log
      * @return bool
      */
     public function save(array $log): bool
@@ -66,11 +63,11 @@ class Syslog implements LogHandlerInterface
                 $pri = '<' . $pri . '>';
 
                 $header = datetime_format('M j H:i:s');
-                if (!empty($this->config['hostname'])) {
-                    $header .= ' ' . $this->config['hostname'];
+                if (!empty($this->config['msg']['hostname'])) {
+                    $header .= ' ' . $this->config['msg']['hostname'];
                 }
 
-                $content = $this->config['tag'] . ': ';
+                $content = $this->config['msg']['tag'] . ': ';
                 if (is_callable($this->config['msg']['handler'])) {
                     $content .= call_user_func_array($this->config['msg']['handler'], [$msg]);
                 } else {
