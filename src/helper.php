@@ -5,8 +5,10 @@ function think_trace($log, ?Throwable $e, string $level = 'error')
     $trace = rtrim($log, "\n") . "\n";
 
     // request
-    $trace .= think_request_trace();
-
+    if (function_exists('think_request_trace')) {
+        $trace .= think_request_trace();
+    }
+    
     // debug
     if (is_null($e)) {
         ob_start();
