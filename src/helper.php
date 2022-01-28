@@ -1,6 +1,6 @@
 <?php
 
-function think_trace($log, ?Throwable $e, string $level = 'error')
+function think_trace($log, ?Throwable $e, string $level = 'error', bool $cache = true)
 {
     $trace = rtrim($log, "\n") . "\n";
 
@@ -22,8 +22,11 @@ function think_trace($log, ?Throwable $e, string $level = 'error')
     }
 
     $trace .= $debug;
-
+    
     \think\facade\Log::record($trace, $level);
+    if (!$cache) {
+        \think\facade\Log::save();
+    }
 }
 
 function think_trace_error($log, ?Throwable $e = null)
